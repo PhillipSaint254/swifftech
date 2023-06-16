@@ -1,0 +1,30 @@
+{% extends "movies/base1.html" %}
+
+{% block body %}
+
+<style>
+    .message-box {
+        position: relative;
+        background-color: #EDEADE;
+        width: 60px;
+        height: 50px;
+        align-items: center;
+        padding: 10px;
+    }
+    .message {
+        color: black;
+        align-items: left;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="message-box">
+                <p class="message">{{ message }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

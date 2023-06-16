@@ -1,0 +1,86 @@
+{% extends "movies/base1.html" %}
+
+{% block body %}
+
+<style>
+    .message-box {
+        position: relative;
+        background-color: #EDEADE;
+        align-items: center;
+        width: 600px;
+        height: 50px;
+    }
+</style>
+
+<div class="container-fluid full">
+    <div class="row">
+        {% for message in messages %}
+        <div class="col mx-auto">
+            {% if message.to is "all" %}
+                {% if message.unread %}
+                <div class="message-box text-black unread">
+                    <a href="/messages/{{ message.pk }}/">
+                        <div class="time">
+                            <span>
+                                {{ message.created_at.date }}-{{ message.created_at.month }}-{{ message.created_at.year }}
+                                {{ message.created_at.hour }}-{{ message.created_at.minute }}-{{ message.created_at.second }}
+                            </span>
+                        </div>
+                        <div class="message">
+                            <p>{{ message.message }}</p>
+                        </div>
+                    </a>
+                </div>
+                {% else %}
+                    <a href="/messages/{{ message.pk }}/">
+                    <div class="message-box text-dark read">
+                        <div class="time">
+                            <span>
+                                {{ message.created_at.date }}-{{ message.created_at.month }}-{{ message.created_at.year }}
+                                {{ message.created_at.hour }}-{{ message.created_at.minute }}-{{ message.created_at.second }}
+                            </span>
+                        </div>
+                        <div class="message">
+                            <p>{{ message.message }}</p>
+                        </div>
+                    </div>
+                </a>
+                {% endif %}
+            {% else %}
+                {% if user.username == message.to %}
+                    {% if message.unread %}
+                        <a href="/messages/{{ message.pk }}/">
+                    <div class="message-box text-black">
+                        <div class="time">
+                            <span>
+                                {{ message.created_at.date }}-{{ message.created_at.time }}
+                            </span>
+                        </div>
+                        <div class="message">
+                            <p>{{ message.message }}</p>
+                        </div>
+                    </div>
+                </a>
+                    {% else %}
+                        <a href="/messages/{{ message.pk }}/">
+                    <div class="message-box text-dark">
+                        <div class="time">
+                            <span>
+                                {{ message.created_at.date }}-{{ message.created_at.month }}-{{ message.created_at.year }}
+                                {{ message.created_at.hour }}-{{ message.created_at.minute }}-{{ message.created_at.second }}
+                            </span>
+                        </div>
+                        <div class="message">
+                            <p>{{ message.message }}</p>
+                        </div>
+                    </div>
+                </a>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

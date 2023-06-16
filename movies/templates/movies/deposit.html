@@ -1,0 +1,35 @@
+{% extends 'movies/base1.html' %}
+
+{% block body %}
+
+<div class="container bg-muted">
+  <div class="row d-flex mx-auto">
+    <div class="col-sm-10 col-md-8 col-lg-6 full">
+        <form action="" method="post" style="height:26rem; width: 34rem" class="bg-white">
+            {% csrf_token %}
+            <div class="px-2">
+                <h2 class="text-danger">Note before pay:</h2>
+                <p>
+                    <sup>Please note that all our actions regarding your deposit are strictly guided by our code of conduct mentioned in our privacy policy.
+                    <a href="/footer/privacy_policy/">Click here</a> to read the privacy policy.</sup>
+                </p>
+                <p>Before confirming pay, please make sure you visit swifftech so that your payment maybe confirmed. No unconfirmed transactions shall be processed.</p>
+            </div>
+
+            <div class="input-group-prepend col-xs-7 col-xl-11 py-3">
+                <span class="input-group-text">Amount</span>
+                <input type="number" class="form-control" name="amount" id="amount" required>
+            </div>
+            <div class="input-group-prepend col-xs-7 col-xl-11 pb-3">
+                <span class="input-group-text">Transaction code</span>
+                <input type="text" class="form-control" name="transaction_code" id="transaction_code" required>
+            </div>
+            <div class="input-group-prepend py-3 ml-3">
+                <button type="submit" class="btn btn-outline-primary btn-lg text-uppercase">pay</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

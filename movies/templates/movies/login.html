@@ -1,0 +1,129 @@
+{% extends "movies/base1.html" %}
+
+{% block body %}
+<style>
+    *{
+       margin: 0;
+       padding: 0;
+    }
+    body{
+        background-image: url("https://res.cloudinary.com/swiff-tech/image/upload/v1655633696/cloud_wghovr.jpg");
+        background-position: center;
+        background-size: cover;
+        font-family: sans-serif;
+        margin-top: 0;
+        min-height: 100vh !important;
+    }
+    .main{
+        background-color: rgb(0, 0, 0, 0.5);
+        width: 350px;
+        margin: auto;
+
+    }
+    form {
+        padding: 10px;
+    }
+    .username{
+        position: relative;
+        left:10px;
+        top: 0;
+        line-height: 40px;
+        width: 90%;
+        border-radius: 6px;
+        padding: 0 22px;
+        font-size: 16px;
+        color: #555;
+    }
+    .password{
+        position: relative;
+        left: 10px;
+        top: 10px;
+        width: 90%;
+        line-height:40px;
+        border-radius: 6px;
+        padding: 0 26px;
+        font-size: 16px;
+    }
+    .change-password {
+        top: 15px;
+        left: 10px;
+    }
+    .changer-link {
+        left: 10px;
+        width: 100%;
+    }
+    .regform{
+        width: 470px;
+        background-color: rgb(0, 0, 0, 6);
+        margin: auto;
+        color: #FFFFFF;
+        padding: 10px 0px 10px 0px;
+        text-align: center;
+        border-radius: 15px 15px 0px 0px;
+    }
+    .main{
+        background-color: rgb(0, 0, 0, 0.5);
+        width: 470px;
+        margin: auto;
+
+    }
+    #submit{
+        background-color: #3BAF9F;
+        display: block;
+        margin: 20px 0px 0px 10px;
+        text-align: center;
+        border-radius: 12px;
+        border: 2px solid #366473;
+        padding: 10px 60px;
+        outline: none;
+        color: white;
+        cursor: pointer;
+        transition: 0.25px;
+    }
+    #submit:hover{
+        background-color: #5390F5;
+    }
+    .name{
+        margin-left: 25px;
+        margin-top: 30px;
+        width: 125px;
+        color: white;
+        font-size: 18px;
+        font-weight: 700;
+    }
+</style>
+
+<script>
+    $("input").attr("maxlength", 4)
+</script>
+
+<div class="container full">
+    <div class="row p-4">
+        <div class="regform"><h1>User Login</h1></div>
+        <div class="main">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="text-center text-danger">
+                <p>{{ message }}</p>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <form action="" method="post" class="pb-5">
+                {% csrf_token %}
+                <input type="text" class="username" name="username" placeholder="Username">
+
+                <div id="password">
+                    <input type="password" class="password" name="password" placeholder="password">
+                </div>
+                <input type="submit" id="submit" placeholder="Login" value="Login">
+
+                <div class="change-password">
+                    <a href="/forgot_password/" style="font-size: 15px; color: #ff0000;" class="pl-3 pt-4 changer-link">Forgot your password?</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

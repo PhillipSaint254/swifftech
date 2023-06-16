@@ -1,0 +1,21 @@
+{% extends "movies/base1.html" %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row mx-auto full">
+        <div class="col">
+            <form action="" method="post">
+                {% csrf_token %}
+                {% for season in movie %}
+                <div class="py-3">
+                    <input type="checkbox" name="{{ season.season_no }}" value="{{ season.season_no }}" {% if season.season_no in checked %}checked{% endif %}> {{ season.series_name }} season {{ season.season_no }}
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-outline-success btn-lg">Buy</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

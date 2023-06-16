@@ -1,0 +1,218 @@
+{% extends 'movies/base1.html' %}
+
+{% block body %}
+<style>
+    *{
+       margin: 0;
+       padding: 0;
+    }
+    body{
+        background-image: url("https://res.cloudinary.com/swiff-tech/image/upload/v1655633696/cloud_wghovr.jpg");
+        background-position: center;
+        background-size: cover;
+        font-family: sans-serif;
+        margin-top: 0;
+    }
+    .regform{
+        width: 650px;
+        background-color: rgb(0, 0, 0, 6);
+        margin: auto;
+        color: #FFFFFF;
+        padding: 10px 0px 10px 0px;
+        text-align: center;
+        border-radius: 15px 15px 0px 0px;
+    }
+    .main{
+        background-color: rgb(0, 0, 0, 0.5);
+        width: 650px;
+        margin: auto;
+
+    }
+    form {
+        padding: 10px;
+    }
+    #name{
+        width: 100%;
+        height: 100px;
+    }
+    .name{
+        margin-left: 25px;
+        margin-top: 30px;
+        width: 125px;
+        color: white;
+        font-size: 18px;
+        font-weight: 700;
+    }
+    .firstname{
+        position: relative;
+        left: 10px;
+        top:0;
+        width: 40%;
+        line-height:40px;
+        border-radius: 6px;
+        padding: 0 12px;
+        font-size: 16px;
+        color: #555;
+    }
+    .lastname{
+        position: relative;
+        left: 30%;
+        top: -44px;
+        width: 40%;
+        line-height: 40px;
+        border-radius: 6px;
+        padding: 0 12px;
+        font-size: 16px;
+        color: #555;
+    }
+    .firstlabel{
+        position:relative;
+        color: #E5E5E5;
+        text-transform: capitalize;
+        font-size: 14px;
+        left: 10px;
+        top: -10px;
+    }
+    .lastlabel{
+        position:relative;
+        color: #E5E5E5;
+        text-transform: capitalize;
+        font-size: 14px;
+        left: -11%;
+        top: -10px;
+    }
+    .username{
+        position: relative;
+        left:10px;
+        top: -20px;
+        line-height: 40px;
+        width: 90%;
+        border-radius: 6px;
+        padding: 0 22px;
+        font-size: 16px;
+        color: #555;
+    }
+    .email{
+        position: relative;
+        left: 10px;
+        top: -10px;
+        line-height: 40px;
+        width: 90%;
+        border-radius: 6px;
+        padding: 0 22px;
+        font-size: 16px;
+        color: #555;
+    }
+    .phone{
+        position: relative;
+        left:10px;
+        top: 0;
+        line-height: 40px;
+        width: 90%;
+        border-radius: 6px;
+        padding: 0 22px;
+        font-size: 16px;
+        color: #555;
+    }
+    .firstpassword{
+        position: relative;
+        left: 10px;
+        top: 10px;
+        width: 40%;
+        line-height:40px;
+        border-radius: 6px;
+        padding: 0 22px;
+        font-size: 16px;
+    }
+    .lastpassword{
+        position: relative;
+        left: 20%;
+        top: -35px;
+        width: 40%;
+        line-height: 40px;
+        border-radius: 6px;
+        padding: 0 22px;
+        font-size: 16px;
+        color: #555;
+    }
+    #password {
+        width: 100%;
+    }
+    .passwordlabel{
+        position:relative;
+        color: #E5E5E5;
+        text-transform: capitalize;
+        font-size: 14px;
+        left:10px;
+        top:-5px;
+    }
+    .confirmlabel{
+        position:relative;
+        color: #E5E5E5;
+        text-transform: capitalize;
+        font-size: 14px;
+        left: 55%;
+        top:-38px;
+    }
+    #submit{
+        background-color: #3BAF9F;
+        display: block;
+        margin: -10px 0px 0px 10px;
+        text-align: center;
+        border-radius: 12px;
+        border: 2px solid #366473;
+        padding: 10px 70px;
+        outline: none;
+        color: white;
+        cursor: pointer;
+        transition: 0.25px;
+    }
+    #submit:hover{
+        background-color: #5390F5;
+    }
+</style>
+
+<script>
+    $("input").attr("maxlength", 4)
+</script>
+
+<div class="container full">
+    <div class="row p-4">
+        <div class="regform"><h1>User Registration</h1></div>
+        <div class="main">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="text-center text-danger">
+                <p>{{ message }}</p>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <form action="" method="post" class="pb-5">
+                {% csrf_token %}
+                <div id="name">
+                    <input type="text" class="firstname" id="first_name" name="first_name"><br>
+                    <label for="first_name" class="firstlabel">first name</label>
+                    <input type="text" class="lastname" id="last_name" name="last_name">
+                    <label for="last_name" class="lastlabel">last name</label>
+                </div>
+
+                <input type="text" class="username" name="username" placeholder="Username">
+
+                <input type="text" class="email" name="email" placeholder="Email">
+
+                <input type="tel" class="phone" name="phone" placeholder="Phone">
+
+                <div id="password">
+                    <input type="password" class="firstpassword" id="password1" name="password1"><br>
+                    <label for="password1" class="passwordlabel">enter password</label>
+                    <input type="password" id="password2" class="lastpassword" name="password2">
+                    <label for="password2" class="confirmlabel">confirm password</label>
+                </div>
+                <input type="submit" id="submit" placeholder="Register" value="Register">
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

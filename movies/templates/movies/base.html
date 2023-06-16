@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Movies and series">
+    <meta name="keywords" content="Movie, series">
+    <meta name="author" content="Phillip Saint">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Dancing+Script" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <title>{% block title %}{% endblock %}</title>
+    <style>
+        body{
+            background-color: #cccccc;
+        }
+        nav{
+            width:100%;
+            overflow:auto;
+            background-color: #24262b;
+        }
+        nav a{
+            color: #ffffff;
+        }
+        nav a:hover{
+            background: yellow;
+            color: black;
+        }
+        nav button #toggler {
+            color: white;
+        }
+        .font{
+            font-family: 'Dancing Script'
+        }
+      #container {
+        display: flex;
+        justify-content: space-between; /* Can be changed in the live sample */
+      }
+        .full{
+            min-height: 100vh !important;
+        }
+        #filler,#progress{
+            background: linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.9)) ,url('https://res.cloudinary.com/swiff-tech/image/upload/v1617714959/black_panther_eii3su.jpg')center/cover no-repeat fixed;
+        }
+        .categories-picture{
+            background: url('https://res.cloudinary.com/swiff-tech/image/upload/v1617714959/black_panther_eii3su.jpg')center/cover no-repeat fixed;
+        }
+        .height-80{
+            min-height: 80vh;
+        }
+      #container > div > div {
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(-45deg, #788cff, #b4c8ff);
+        justify-content: space-around; /* Can be changed in the live sample */
+      }
+      .my-white {
+        text-color: #FFFFFF;
+      }
+      .snow {
+        color: #FFFAFA;
+      }
+      .honeydew {
+        text-color: #F0FFF0;
+      }
+      .mint-cream {
+        text-color: #F5FFFA;
+      }
+      .azure {
+        text-color: #F0FFFF;
+      }
+      .alice-blue {
+        text-color: #F0F8FF;
+      }
+      .ghost-white {
+        text-color: #F8F8FF;
+      }
+      .white-smoke {
+        text-color: #F5F5F5;
+      }
+      .seashell {
+        text-color: #FFF5EE;
+      }
+      .beige {
+        text-color: #F5F5DC;
+      }
+      .old-lace {
+        text-color: #FDF5E6;
+      }
+      .floral-white {
+        text-color: #FFFAF0;
+      }
+      .ivory {
+        text-color: #FFFFF0;
+      }
+      .antique-white {
+        text-color: #FAEBD7;
+      }
+      .linen {
+        text-color: #FAF0E6;
+      }
+      .lavender-blush {
+        text-color: #FFF0F5;
+      }
+      .misty-rose {
+        text-color: #FFE4E1;
+      }
+      .navajo-white {
+        text-color: #FFDEAD;
+      }
+      #filler {
+        color: 	rgb(255,222,173);
+      }
+    </style>
+    <style>
+.title-underline{
+        width: 160px;
+        height: 10px;
+        margin: 0 auto;
+        /*background: blue!important;*/
+    }
+.page-section {
+  padding: 6rem 0;
+}
+.page-section h2.section-heading {
+  font-size: 2.5rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+.page-section h3.section-subheading {
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: italic;
+  font-family: "Droid Serif", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  margin-bottom: 4rem;
+}
+#portfolio .portfolio-item {
+  max-width: 25rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+#portfolio .portfolio-item .portfolio-link {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+}
+#portfolio .portfolio-item .portfolio-link .portfolio-hover {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(254, 209, 54, 0.9);
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity ease-in-out 0.25s;
+}
+#portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content {
+  font-size: 1.25rem;
+  color: white;
+}
+#portfolio .portfolio-item .portfolio-link:hover .portfolio-hover {
+  opacity: 1;
+}
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+#portfolio .portfolio-item .portfolio-caption {
+  padding: 1.5rem;
+  text-align: center;
+  background-color: #fff;
+}
+#portfolio .portfolio-item .portfolio-caption .portfolio-caption-heading {
+  font-size: 1.5rem;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-weight: 700;
+  margin-bottom: 0;
+}
+#portfolio .portfolio-item .portfolio-caption .portfolio-caption-subheading {
+  font-style: italic;
+  font-family: "Droid Serif", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.portfolio-modal .modal-dialog {
+  margin: 1rem;
+  max-width: 100vw;
+}
+.portfolio-modal .modal-content {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  text-align: center;
+}
+.portfolio-modal .modal-content h2 {
+  font-size: 3rem;
+  line-height: 3rem;
+}
+.portfolio-modal .modal-content p.item-intro {
+  font-style: italic;
+  margin-bottom: 2rem;
+  font-family: "Droid Serif", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+.portfolio-modal .modal-content p {
+  margin-bottom: 2rem;
+}
+.portfolio-modal .modal-content ul.list-inline {
+  margin-bottom: 2rem;
+}
+.portfolio-modal .modal-content img {
+  margin-bottom: 2rem;
+}
+.portfolio-modal .close-modal {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+  background-color: transparent;
+}
+.portfolio-modal .close-modal:hover {
+  opacity: 0.3;
+}
+
+.container,
+.container-fluid,
+.container-xl,
+.container-lg,
+.container-md,
+.container-sm {
+  width: 100%;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 576px) {
+  .container-sm, .container {
+    max-width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  .container-md, .container-sm, .container {
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .container-lg, .container-md, .container-sm, .container {
+    max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .container-xl, .container-lg, .container-md, .container-sm, .container {
+    max-width: 1140px;
+  }
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -0.75rem;
+  margin-left: -0.75rem;
+}
+.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+}
+.no-gutters > .col,
+.no-gutters > [class*=col-] {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.col-xl,
+.col-xl-auto, .col-xl-12, .col-xl-11, .col-xl-10, .col-xl-9, .col-xl-8, .col-xl-7, .col-xl-6, .col-xl-5, .col-xl-4, .col-xl-3, .col-xl-2, .col-xl-1, .col-lg,
+.col-lg-auto, .col-lg-12, .col-lg-11, .col-lg-10, .col-lg-9, .col-lg-8, .col-lg-7, .col-lg-6, .col-lg-5, .col-lg-4, .col-lg-3, .col-lg-2, .col-lg-1, .col-md,
+.col-md-auto, .col-md-12, .col-md-11, .col-md-10, .col-md-9, .col-md-8, .col-md-7, .col-md-6, .col-md-5, .col-md-4, .col-md-3, .col-md-2, .col-md-1, .col-sm,
+.col-sm-auto, .col-sm-12, .col-sm-11, .col-sm-10, .col-sm-9, .col-sm-8, .col-sm-7, .col-sm-6, .col-sm-5, .col-sm-4, .col-sm-3, .col-sm-2, .col-sm-1, .col,
+.col-auto, .col-12, .col-11, .col-10, .col-9, .col-8, .col-7, .col-6, .col-5, .col-4, .col-3, .col-2, .col-1 {
+  position: relative;
+  width: 100%;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+}
+
+.col {
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+}
+
+.row-cols-1 > * {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+.row-cols-2 > * {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.row-cols-3 > * {
+  flex: 0 0 33.3333333333%;
+  max-width: 33.3333333333%;
+}
+
+.row-cols-4 > * {
+  flex: 0 0 25%;
+  max-width: 25%;
+}
+
+.row-cols-5 > * {
+  flex: 0 0 20%;
+  max-width: 20%;
+}
+
+.row-cols-6 > * {
+  flex: 0 0 16.6666666667%;
+  max-width: 16.6666666667%;
+}
+
+.col-auto {
+  flex: 0 0 auto;
+  width: auto;
+  max-width: 100%;
+}
+
+.col-1 {
+  flex: 0 0 8.3333333333%;
+  max-width: 8.3333333333%;
+}
+
+.col-2 {
+  flex: 0 0 16.6666666667%;
+  max-width: 16.6666666667%;
+}
+
+.col-3 {
+  flex: 0 0 25%;
+  max-width: 25%;
+}
+
+.col-4 {
+  flex: 0 0 33.3333333333%;
+  max-width: 33.3333333333%;
+}
+
+.col-5 {
+  flex: 0 0 41.6666666667%;
+  max-width: 41.6666666667%;
+}
+
+.col-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.col-7 {
+  flex: 0 0 58.3333333333%;
+  max-width: 58.3333333333%;
+}
+
+.col-8 {
+  flex: 0 0 66.6666666667%;
+  max-width: 66.6666666667%;
+}
+
+.col-9 {
+  flex: 0 0 75%;
+  max-width: 75%;
+}
+
+.col-10 {
+  flex: 0 0 83.3333333333%;
+  max-width: 83.3333333333%;
+}
+
+.col-11 {
+  flex: 0 0 91.6666666667%;
+  max-width: 91.6666666667%;
+}
+
+.col-12 {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+.page-section h2.section-heading {
+  font-size: 2.5rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+.page-section h3.section-subheading {
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: italic;
+  font-family: "Droid Serif", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  margin-bottom: 4rem;
+}
+@media (min-width: 1200px) {
+  .col-xl {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+  }
+
+  .row-cols-xl-1 > * {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .row-cols-xl-2 > * {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .row-cols-xl-3 > * {
+    flex: 0 0 33.3333333333%;
+    max-width: 33.3333333333%;
+  }
+
+  .row-cols-xl-4 > * {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+
+  .row-cols-xl-5 > * {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+
+  .row-cols-xl-6 > * {
+    flex: 0 0 16.6666666667%;
+    max-width: 16.6666666667%;
+  }
+ }
+ .img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+    </style>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        .footer{
+            line-height: 1.5;
+            font-family: 'Poppins', sans-serif;
+        }
+        #footer{
+            bottom: 0;
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+        }
+        .footer-container{
+            max-width: 1170px;
+            margin:auto;
+        }
+        .footer-row{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .footer-ul{
+            list-style: none;
+        }
+        .footer{
+            background-color: #24262b;
+            padding: 70px 0;
+        }
+        .footer-col{
+           width: 25%;
+           padding: 0 15px;
+        }
+        .footer-col h4{
+            font-size: 18px;
+            color: #ffffff;
+            text-transform: capitalize;
+            margin-bottom: 35px;
+            font-weight: 500;
+            position: relative;
+        }
+        .footer-col h4::before{
+            content: '';
+            position: absolute;
+            left:0;
+            bottom: -10px;
+            background-color: #e91e63;
+            height: 2px;
+            box-sizing: border-box;
+            width: 90px;
+        }
+        .footer-col ul li:not(:last-child){
+            margin-bottom: 10px;
+        }
+        .footer-col ul li a{
+            font-size: 16px;
+            margin-left: -30px;
+            text-transform: capitalize;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 300;
+            color: #bbbbbb;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        .footer-col ul li a:hover{
+            color: #ffffff;
+            padding-left: 8px;
+        }
+        .footer-col .social-links a{
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+            background-color: rgba(255,255,255,0.2);
+            margin:0 10px 10px 0;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            color: #ffffff;
+            transition: all 0.5s ease;
+        }
+        .footer-col .social-links a:hover{
+            color: #24262b;
+            background-color: #ffffff;
+        }
+
+        /*responsive*/
+        @media(max-width: 767px){
+          .footer-col{
+            width: 50%;
+            margin-bottom: 30px;
+        }
+        }
+        @media(max-width: 574px){
+          .footer-col{
+            width: 100%;
+        }
+        }
+    </style>
+    <style>
+        .image__class {
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+            width: 270px;
+            height: 270px;
+        }
+
+        .image__ing {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .image__overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            color: #ffffff;
+            font-family: 'Quicksand', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .image__overlay > * {
+            transform: translateY(20px);
+            transition: transform 0.4s;
+        }
+
+        .image__overlay:hover {
+            opacity: 1;
+        }
+
+        .image__overlay:hover > * {
+            transform: translateY(0);
+        }
+
+        .image__title {
+            font-size: 2em;
+            font-weight: 50px;
+        }
+
+        .image__description {
+            font-size: 1.25em;
+            margin-top: 0.25em;
+            color: antiquewhite;
+        }
+    </style>
+    <nav class="navbar navbar-expand-md navbar-light text-light">
+        <a href="/" class="navbar-brand font text-white"><h3>Swifftech</h3></a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarmenu">
+            <span class="navbar-toggler-icon navbar-light" id="toggler"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarmenu">
+            {% if user.is_authenticated %}
+            <ul class="navbar-nav">
+                <li>
+                    <h5 class="p text-dark"><a href="/account/" style="color: #bbbbbb;" class="nav-link">{{ user.username }}</a></h5>
+                </li>
+                <li class="nav-item"><a href="/movies/all_series/" class="nav-link" style="color: #bbbbbb;">series</a></li>
+                <li class="nav-item"><a href="/movies/all_movies/" class="nav-link" style="color: #bbbbbb;">movies</a></li>
+                <li class="nav-item"><a href="/logout/" class="nav-link" style="color: #bbbbbb;">logout</a></li>
+                {% if user.details.subscription != "not subscribed" %}
+                <li class="nav-item"><a href="/buy-subscribed/" class="nav-link" style="color: #bbbbbb;">buy movie</a></li>
+                {% endif %}
+            </ul>
+            {% else %}
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="/login/" class="nav-link" style="color: #bbbbbb;">log in</a></li>
+                <li class="nav-item"><a href="/signup/" class="nav-link" style="color: #bbbbbb;">sign up</a></li>
+            </ul>
+            {% endif %}
+        </div>
+    </nav>
+</head>
+<body>
+<!--filler section-->
+<section id="filler" class="p-5 azure" style="text-color: #FFFAFA;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-center mx-auto">
+                <h1 class="font-cursive mx-auto text-uppercase font">Swifftech movies section!</h1>
+                <p class="pt-3">Welcome to swifftech movies section. In this homepage we have included links to various parts of the website to give you an easier time. Please sign up or login to access all our services.</p>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-7 col-xm-11 col-lg-4 mx-auto text-center">
+                <form action="/movies/search/" method="post" class="mx-auto">
+                    {% csrf_token %}
+                    <div class="input-group-prepend col-xs-7 col-xl-11 py-1">
+                        <span class="input-group-text">Search</span>
+                        <input type="text" class="form-control" name="search" id="search" required>
+                    </div>
+                    <div class="input-group-prepend py-3 ml-3">
+                        <button type="submit" class="btn btn-outline-primary text-uppercase">submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-md-8 col-lg-10 mx-auto text-white text-uppercase">
+                <div class="text-right">
+                    <a href="/movies/categories/" class="text-info">categories</a>
+                </div>
+                <div class="text-center">
+                    <a href="/movies/all_movies/" class="text-secondary">all movies</a>
+                </div>
+                <div class="d-flex text-left">
+                    <a href="/movies/suggested/" class="text-danger">movies you may like</a>
+                </div>
+                <div class="text-center text-white">
+                    <a href="/movies/all_series/" class="text-white">all series</a>
+                </div>
+                <div class="text-right">
+                    <a href="/movies/latest/" class="text-success">latest movies</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--end of filler section-->
+{% block body %}
+
+{% endblock %}
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>

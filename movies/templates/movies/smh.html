@@ -1,0 +1,7 @@
+{% for player in players %}
+<tr>
+  <td>
+  <input type="checkbox" name="player_check"{% if player.player_check %} checked{% endif %}>
+  </td>
+</tr>
+{% endfor %}

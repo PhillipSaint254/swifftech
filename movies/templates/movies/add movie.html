@@ -1,0 +1,236 @@
+{% extends 'movies/base1.html' %}
+
+{% block body %}
+
+{% if user.is_superuser %}
+
+<style>
+    *{
+       margin: 0;
+       padding: 0;
+    }
+    body{
+        background-image: url("data:image/jpeg;base64,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");
+        background-position: center;
+        background-size: cover;
+        font-family: sans-serif;
+        margin-top: 0;
+    }
+    .regform{
+        width: 650px;
+        background-color: rgb(0, 0, 0, 6);
+        margin: auto;
+        color: #FFFFFF;
+        padding: 10px 0px 10px 0px;
+        text-align: center;
+        border-radius: 15px 15px 0px 0px;
+    }
+    .main{
+        background-color: rgb(0, 0, 0, 0.5);
+        width: 650px;
+        margin: auto;
+
+    }
+    form {
+        padding: 10px;
+    }
+    #type{
+        width: 100%;
+        height: 100px;
+    }
+    .name{
+        margin-left: 25px;
+        margin-top: 30px;
+        width: 125px;
+        color: white;
+        font-size: 18px;
+        font-weight: 700;
+    }
+    .movie{
+        position: relative;
+        left: 120px;
+        top: -30px;
+        line-height:40px;
+        border-radius: 6px;
+        padding: 0 22px;
+        font-size: 16px;
+    }
+    .series{
+        position: relative;
+        left:300px;
+        top:-60px;
+        line-height: 40px;
+        border-radius: 6px;
+        padding: 0 22px;
+        font-size: 16px;
+        color: #555;
+    }
+    .firstlabel{
+        position:relative;
+        color: #E5E5E5;
+        text-transform: capitalize;
+        font-size: 14px;
+        left:123px;
+        top:-25px;
+    }
+    .lastlabel{
+        position:relative;
+        color: #E5E5E5;
+        text-transform: capitalize;
+        font-size: 14px;
+        left:265px;
+        top:-25px;
+    }
+    .movie-name{
+        position: relative;
+        left:120px;
+        top: -37px;
+        line-height: 40px;
+        width: 490px;
+        border-radius: 6px;
+        padding: 0 22px;
+        font-size: 16px;
+        color: #555;
+    }
+    .genre{
+        position: relative;
+        left:120px;
+        top: -37px;
+        line-height: 40px;
+        width: 490px;
+        border-radius: 6px;
+        padding: 0 22px;
+        font-size: 16px;
+        color: #555;
+    }
+    .rating{
+        position: relative;
+        left:120px;
+        top: -37px;
+        line-height: 40px;
+        width: 490px;
+        border-radius: 6px;
+        padding: 0 22px;
+        font-size: 16px;
+        color: #555;
+    }
+    .season-no{
+        position: relative;
+        left: 120px;
+        top:-37px;
+        line-height:40px;
+        border-radius: 6px;
+        padding: 0 22px;
+        font-size: 16px;
+    }
+    .episodes-no{
+        position: relative;
+        left:268px;
+        top:-80px;
+        line-height: 40px;
+        border-radius: 6px;
+        padding: 0 22px;
+        font-size: 16px;
+        color: #555;
+    }
+    .season-no-label{
+        position:relative;
+        color: #E5E5E5;
+        text-transform: capitalize;
+        font-size: 14px;
+        left:123px;
+        top:-45px;
+    }
+    .episodes-no-label{
+        position:relative;
+        color: #E5E5E5;
+        text-transform: capitalize;
+        font-size: 14px;
+        left:27px;
+        top:-45px;
+    }
+    #submit{
+        background-color: #3BAF9F;
+        display: block;
+        margin: 0px 0px 0px 120px;
+        text-align: center;
+        border-radius: 12px;
+        border: 2px solid #366473;
+        padding: 14px 110px;
+        outline: none;
+        color: white;
+        cursor: pointer;
+        transition: 0.25px;
+    }
+    #submit:hover{
+        background-color: #5390F5;
+    }
+</style>
+
+<div class="regform"><h1>Add Movies to Database</h1></div>
+<div class="main">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="text-center text-danger">
+        <p>{{ message }}</p>
+    </div>
+    {% endfor %}
+    {% endif %}
+    <form action="" method="post" class="pb-5">
+        {% csrf_token %}
+        <div id="type">
+            <h2 class="name">type</h2>
+            <input type="radio" style="height:30px; width:30px; vertical-align: middle;" class="movie" id="movie" value="movie" name="type"><br>
+            <label for="movie" class="firstlabel">movie</label>
+            <input type="radio" style="height:30px; width:30px; vertical-align: middle;" class="series" id="series" value="series" name="type">
+            <label for="series" class="lastlabel">series</label>
+        </div>
+
+        <h2 class="name">name</h2>
+        <input type="text" class="movie-name" name="name" placeholder="name of the movie" required>
+
+        <h2 class="name">genre</h2>
+        <input type="text" class="genre" name="genre" placeholder="genre of the movie" required>
+
+        <h2 class="name">Ratting</h2>
+        <input type="text" class="rating" name="rating" placeholder="Rating" required>
+
+        <h2 class="name">Date</h2>
+        <input type="text" class="rating" name="day" placeholder="Date of release" required>
+
+        <h2 class="name">Month</h2>
+        <input type="text" class="rating" name="month" placeholder="Month of release" required>
+
+        <h2 class="name">Year</h2>
+        <input type="text" class="rating" name="year" placeholder="Year of release" required>
+
+        <h2 class="name">Trailer</h2>
+        <input type="text" class="rating" name="trailer" placeholder="Link to movie trailer" required>
+
+        <h2 class="name">Logo</h2>
+        <input type="text" class="rating" name="logo" placeholder="Link to movie logo" required>
+
+        <h2 class="name">Description</h2>
+        <textarea name="description" id="description" cols="30" rows="10" placeholder="Paste movie description"></textarea>
+
+        <div id="seasons">
+
+            {% for y in range %}
+            <h2 class="name">season {{ y }}</h2>
+            <input type="text" class="season-no" id="season-{{ y }}" name="season-{{ y }}" value="{{ y }}"><br>
+            <label for="season-{{ y }}" class="season-no-label">season number</label>
+            <input type="text" id="episodes-{{ y }}" class="episodes-no" name="episodes-{{ y }}">
+            <label for="episodes-{{ y }}" class="episodes-no-label">number of episodes</label>
+            {% endfor %}
+
+        </div>
+        <input type="submit" id="submit" placeholder="save" value="save">
+
+    </form>
+</div>
+
+{% else %}
+<h1 class="text-danger">This is a restricted page. Your access was blocked!!</h1>
+{% endif %}
+
+{% endblock %}

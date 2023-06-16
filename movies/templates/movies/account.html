@@ -1,0 +1,120 @@
+{% extends 'movies/base1.html' %}
+{% load post_tags %}
+
+{% block body %}
+<style>
+table, th, td {
+  border:1px solid black;
+}
+</style>
+
+<div class="container text-black">
+    <div class="row mx-auto text-dark">
+        <div class="col-sm-6 col-md-8 col-md-10">
+            <h1 class="display-5 text-uppercase mb-0 text-center font">
+                <strong>User info</strong>
+            </h1>
+            <div class="my-3 d-flex justify-content-between">
+                <h3>Username: {{ user.username }}</h3>
+                {% now "jS F Y H:i" %}
+            </div>
+        </div>
+    </div>
+</div>
+{% if total %}
+<!--progress section-->
+<section id="progress" class="p-5">
+    <div class="container">
+        <!--projects title-->
+        <div class="row">
+            <div class="col text-center">
+                <h3 class="display-4 text-uppercase text-light mb-0">
+                    <strong>progress</strong>
+                </h3>
+                <div class="title-underline bg-primary"></div>
+                <p class="mt-2 text-capitalize text-muted">Your activities over so far.</p>
+            </div>
+        </div>
+        <!--end of projects title-->
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                {% for movie, value in dictionary %}
+                    <!--progress bar single-->
+                    {% if value %}
+                        <div class="prog my-3 text-white d-flex justify-content-between">
+                            <h3>{{ movie }}</h3>
+                            <h3>{% percentage value total %}%</h3>
+                        </div>
+                        <div class="progress bg-secondary">
+                            <div class="progress-bar bg-warning" style="width: {% percentage value total %}%;"></div>
+                        </div>
+                    {% endif %}
+                    <!--progress bar single-->
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<!--end of progress section-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-1 col-md-2 col-lg-2"></div>
+        <div class="col-sm-5 col-md-4 col-lg-4 bg-white">
+            <h1>User Information</h1>
+            <p>First Name: {{ user.first_name }}</p>
+            <p>Last Name: {{ user.last_name }}</p>
+            <p>Username: {{ user.username }}</p>
+            <p>Email: {{ user.email }}</p>
+            <p>Phone: {{ user.details.phone }}</p>
+            <a href="/edit/">edit info</a>
+        </div>
+        <div class="col-sm-5 col-md-4 col-lg-4 mx-auto bg-white">
+            <h1>Account Infomation</h1>
+            <p>Subscription: {{ user.details.subscription }}</p>
+            {% if days %}
+            <p>Subscription validity: {{ days }} days</p>
+            {% endif %}
+            <p>Coins: {{ user.details.coins }}</p>
+            <p>Points: {{ user.details.points }}</p>
+            <a href="/deposit/"><button class="btn btn-primary">deposit coins</button></a>
+            <a href="/convert_points/"><button class="btn btn-success">convert points</button></a>
+        </div>
+        <div class="col-sm-1 col-md-2 col-lg-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-1 col-md-2 col-lg-2"></div>
+            <div class="col-sm-10 col-md-8 col-lg-8 bg-white">
+                <hr>
+                <table style="width:100%">
+                  <tr>
+                    <th>Transaction</th>
+                    <th>Amount</th>
+                    <th>Transaction Code</th>
+                    <th>Transaction Type</th>
+                  </tr>
+                    {% for data in sales %}
+                      <tr>
+                        <td>{{ data.item_sold }}</td>
+                        <td>{{ data.price }}</td>
+                        <td>{{ data.transaction_code }}</td>
+                        <td>{{ data.transaction_type }}</td>
+                      </tr>
+                    {% endfor %}
+                </table>
+
+            </div>
+        <div class="col-sm-1 col-md-2 col-lg-2"></div>
+    </div>
+</div>
+{% else %}
+
+<div class="container">
+    <div class="row mx-auto text-danger">
+        <div class="col-sm-6 col-md-8 col-lg-10 my-5 bg-warning">
+            <h3><i>You have zero activities.</i></h3>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+{% endblock %}

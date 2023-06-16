@@ -1,0 +1,35 @@
+{% extends 'movies/base1.html' %}
+
+{% block body %}
+
+<div class="container full">
+    <div class="row">
+        <div class="col">
+            <p class="display-5 text-center">Showing results for "{{ query }}"</p>
+        </div>
+    </div>
+    {% if result %}
+    <div class="row">
+        {% for movie in result %}
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xm-10 py-3 mx-auto">
+            <div class="image__class">
+                <img src="{{ movie.logo }}" class="image__ing" alt="">
+                <div class="image__overlay">
+                    <div class="image__title">{{ movie.name }}</div>
+                    <a href="/movies/{{ movie.pk }}/">
+                        <p class="image__description">{{ movie.genre }}</p>
+                        <p class="image__description">{{ movie.year }}</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="col bg-warning">
+            <p class="display-5 text-center">No results found. <a href="/movies/request/">Click here</a> to leave a request for your movie to be downloaded,</p>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

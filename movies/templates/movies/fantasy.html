@@ -1,0 +1,36 @@
+{% extends "movies/epic.html" %}
+
+{% block type %}
+
+<style>
+    .card{
+        margin:auto;
+        border:1px solid black;
+    }
+    .top{
+        position:absolute;
+        top:0;
+        left: 0;
+    }
+    .left{
+        position:absolute;
+        bottom: 0;
+        left: 0;
+    }
+
+    .col{
+        padding-left: 5rem;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9 col-lg-10 text-center">
+            <h1 class="display-5 text-capitalize mb-0">
+                <strong>fantasy movies</strong>
+            </h1>
+            <div class="title-underline bg-danger"></div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

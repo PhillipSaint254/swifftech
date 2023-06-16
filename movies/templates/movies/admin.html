@@ -1,0 +1,173 @@
+{% include 'movies/base.html' %}
+
+{% block body %}
+
+{% if not user.is_superuser %}
+<h1 class="text-danger">This is a restricted page. Your access was blocked!!</h1>
+{% else %}
+
+<div class="container">
+    <div class="row">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="col-lg-11 col-md-8 col-sm-6 mx-auto bg-warning pb-2">
+            <p class="display-5">{{ message }}</p>
+        </div>
+        {% endfor %}
+        {% endif %}
+        <div class="col-lg-11 col-md-8 col-sm-6 mx-auto bg-white pb-2">
+            {% if transactions %}
+            <h1 class="display-4 text-capitalize text-center mb-0">
+                <strong>User Deposits</strong>
+            </h1>
+            <div class="title-underline bg-danger"></div>
+            {% for transaction in transactions %}
+            <div class="card col-sm-7 bg-secondary col-lg-4 my-3 ml-1" style="height:12rem; width: 95%;">
+                <div class="card-footer d-flex justify-content-around text-warning">
+                    <span><h2>{{ transaction.username|slice:":200" }}</h2></span>
+                </div>
+                <div class="card-img-top d-flex">
+                    <text numberOfLines={1} class="col">paid <b>{{ transaction.amount }}</b> transaction code <b>{{ transaction.transaction_code }}</b> at <b>{{ transaction.created_at }}</b></text>
+                </div>
+                <div class="card-footer d-flex justify-content-around mx-auto text-light" style="width: 0rem; height: 0rem;">
+                    <a href="/deposit/{{ transaction.pk }}/">
+                        <div class="input-group-prepend py-3 ml-3">
+                            <button type="submit" class="btn btn-outline-primary text-uppercase">Verify</button>
+                        </div>
+                    </a>
+                    <a href="/delete/{{ transaction.pk }}/">
+                        <div class="input-group-prepend py-3 ml-3">
+                            <button type="submit" class="btn btn-outline-danger text-uppercase">Delete</button>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            {% endfor %}
+            {% else %}
+            <div class="col-lg-11 col-md-8 col-sm-6 mx-auto">
+                <p class="display-5">There are no unverified transactions as of now.</p>
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-lg-11 col-md-8 col-sm-6 mx-auto bg-white pb-2">
+            <h1 class="display-4 text-capitalize text-center mb-0">
+                <strong>User Comments</strong>
+            </h1>
+            {% for comment in comments %}
+            {% if not comment.useful %}
+
+            <div class="text-center">
+                <div class="card col-sm-7 bg-secondary col-lg-4 my-3 ml-1" style="height:12rem; width: 95%;">
+                <div class="card-footer d-flex justify-content-around text-warning">
+                    <span><h2>{{ comment.username|slice:":200" }}</h2></span>
+                </div>
+                <div class="card-img-top d-flex">
+                    <text numberOfLines={1} class="col">paid <b>{{ comment.comment }}</b></text>
+                </div>
+                <div class="card-footer d-flex justify-content-around mx-auto text-light" style="width: 0rem; height: 0rem;">
+                    <a href="/comment/save/{{ comment.pk }}/">
+                        <div class="input-group-prepend py-3 ml-3">
+                            <button type="submit" class="btn btn-outline-primary text-uppercase">Save</button>
+                        </div>
+                    </a>
+                    <a href="/comment/delete/{{ comment.pk }}/">
+                        <div class="input-group-prepend py-3 ml-3">
+                            <button type="submit" class="btn btn-outline-danger text-uppercase">Delete</button>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            </div>
+
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endif %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-11 col-md-8 col-sm-6 mx-auto bg-white pb-2">
+            <hr>
+            <div class="d-flex flex-row justify-content-around">
+              <div class="p-2">
+                  <a href="/movies/add_movies/">
+                      <button class="btn btn-outline-primary">Add Movies</button>
+                  </a>
+              </div>
+              <div class="p-2">
+                  <a href="#">
+                      <button class="btn btn-outline-danger">Second Button</button>
+                  </a>
+              </div>
+              <div class="p-2">
+                  <a href="#">
+                      <button class="btn btn-outline-success">Third Button</button>
+                  </a>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col text-center">
+            <h1 class="display-4 text-uppercase text-dark mb-0">
+                <strong>Write users message</strong>
+            </h1>
+            <div class="title-underline bg-primary"></div>
+        </div>
+        <div class="col-lg-11 col-md-8 col-sm-6 mx-auto bg-white pb-2">
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+<footer class="footer">
+ <div class="footer-container">
+    <div class="footer-row">
+        <div class="footer-col">
+            <h4>SWIFFTECH</h4>
+            <ul class="footer-ul">
+                <li><a href="#">about us</a></li>
+                <li><a href="#">our services</a></li>
+                <li><a href="#">privacy policy</a></li>
+                <li><a href="#">affiliate program</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>get help</h4>
+            <ul>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">shipping</a></li>
+                <li><a href="#">returns</a></li>
+                <li><a href="#">order status</a></li>
+                <li><a href="#">payment options</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>online shop</h4>
+            <ul>
+                <li><a href="#">watch</a></li>
+                <li><a href="#">bag</a></li>
+                <li><a href="#">shoes</a></li>
+                <li><a href="#">dress</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>follow us</h4>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+ </div>
+</footer>

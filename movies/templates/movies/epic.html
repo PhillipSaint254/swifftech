@@ -1,0 +1,46 @@
+{% extends "movies/base1.html" %}
+
+{% block body %}
+
+<style>
+    .center {
+        margin-lef: auto;
+        margin-right: auto;
+    }
+</style>
+
+{% block type %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9 col-lg-10 text-center">
+            <h1 class="display-5 text-capitalize mb-0">
+                <strong>epic movies</strong>
+            </h1>
+            <div class="title-underline bg-danger"></div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+<div class="container-fluid">
+    <div class="row d-flex mx-auto bg-white center">
+        {% for movie in movies %}
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xm-10 py-3 px-1 mx-auto">
+                <div class="image__class">
+                    <img src="{{ movie.logo }}" class="image__ing" alt="">
+                    <div class="image__overlay">
+                        <div class="image__title">{{ movie.name }}</div>
+                        <a href="/movies/{{ movie.pk }}/">
+                            <p class="image__description">{{ movie.genre }}</p>
+                            <p class="image__description">{{ movie.year }}</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "movies/base1.html" %}
+
+{% block body %}
+
+<div class="container text-success full">
+    <div class="row">
+        <div class="col-sm-8 col-lg-10 bg-warning">
+            {% if movie.movie %}
+                <p class="display-5 text-center">Are yous sure you want to buy {{ movie.name }}? {{ cash }} will be deducted from your account.</p>
+            {% else %}
+                <p class="display-5 text-center">Are you sure you want to buy {{ movie.name }} season(s)
+                    {% for season, part in season_parts %}
+                        ({{ season }} with parts {{ part }})
+                    {% endfor %}
+                    ? {{ cash }} will be deducted from your account.
+                </p>
+            {% endif %}
+            <a href="/confirm_buy/{{ hash }}/{{ num }}/">
+                <button class="btn btn-outline-primary w-50 text-uppercase my-1">Confirm</button>
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

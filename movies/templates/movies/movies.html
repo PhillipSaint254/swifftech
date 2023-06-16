@@ -1,0 +1,52 @@
+{% extends "movies/base.html" %}
+
+{% block body %}
+<p>Movies page</p>
+<div class="container bg-muted">
+  <div class="row">
+    <div class="col-sm-10 col-md-8 col-lg-6">
+        <form action="" method="post">
+            {% csrf_token %}
+            <input class="btn btn-primary" type="submit" name="all_movies" value="all_movies" placeholder="All Movies">
+            <input class="btn btn-primary" type="submit" value="most_viewed" name="most_viewed" placeholder="Most Viewed">
+            <input class="btn btn-primary" type="submit" value="most_searched" name="most_searched" placeholder="Most Searched">
+            <input class="btn btn-primary" type="submit" value="latest" name="latest" placeholder="Latest">
+            <input class="btn btn-primary" type="submit" value="top_rating" name="top_rating" placeholder="Top Rated">
+            <input class="btn btn-primary" type="submit" value="movies" name="movies" placeholder="Movies">
+            <input class="btn btn-primary" type="submit" value="series" name="series" placeholder="Series">
+        </form>
+    </div>
+  </div>
+</div>
+<div class="full-page py-3">
+    <div class="display-4 text-center text-dark text-capitalize">trending movies</div>
+    <div class="title-underline bg-warning"></div>
+    {% for movie in movies %}
+    <div class="image__class">
+        <img src="../20220422_080922863.jpg" alt="" class="image__ing">
+        <div class="image__overlay">
+            <a href="/movies/{{movie.pk}}/">
+                <div class="image__title">{{ movie.name }}</div>
+                <p class="image__description">{{ movie.genre }}</p>
+            </a>
+            <div class="card-footer bg-secondary d-flex justify-content-around left text-light" style="width: 5rem;">
+                <span>{{ movie.year }}</span>
+            </div>
+        </div>
+    </div>
+<!--    <a href="/{{movie.pk}}/">-->
+<!--        <div class="card col-sm-7 col-lg-4 my-3 ml-1 bg-white" style="height:11rem; width: 95%;">-->
+<!--            <div class="card-img-top d-flex bg-light">-->
+<!--                <div>-->
+<!--                    <img class="img-fluid top" style="width: 5rem; height: 4rem" src="{{ movie.logo }}" alt="Card image cap">-->
+<!--                </div>-->
+<!--                <text numberOfLines={1} class="col text-primary">{{ movie.description|slice:":125" }}...</text>-->
+<!--            </div>-->
+<!--            <div class="card-footer bg-secondary d-flex justify-content-around left text-light" style="width: 5rem;">-->
+<!--                <span>{{ movie.year }}</span>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </a>-->
+    {% endfor %}
+</div>
+{% endblock %}

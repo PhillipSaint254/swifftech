@@ -1,0 +1,54 @@
+{% extends 'movies/base1.html' %}
+
+{% block title %}all movies{% endblock %}
+
+{% block body %}
+
+<style>
+    .card{
+        margin:auto;
+        border:1px solid black;
+    }
+    .top{
+        position:absolute;
+        top:0;
+        left: 0;
+    }
+    .left{
+        position:absolute;
+        bottom: 0;
+        left: 0;
+    }
+
+    .col{
+        padding-left: 5rem;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9 col-lg-10 text-center">
+            <h1 class="display-4 text-capitalize mb-0">
+                <strong>movies you may like</strong>
+            </h1>
+            <div class="title-underline bg-danger"></div>
+        </div>
+    </div>
+</div>
+
+{% for movie in all_movies %}
+<a href="/movies/{{movie.pk}}/">
+    <div class="card col-sm-7 col-lg-4 my-3 ml-1" style="height:12rem; width: 95%;">
+        <div class="card-img-top d-flex bg-light">
+            <div class="pr-5 mr-1">
+                <img class="img-fluid top" id="image" style="width: 9rem; height: 9rem" src="{{ movie.logo }}" alt="Card image cap">
+            </div>
+            <text numberOfLines={1} class="col text-primary">{{ movie.description|slice:":200" }}...</text>
+        </div>
+        <div class="card-footer bg-secondary d-flex justify-content-around left text-light" style="width: 5rem; height: 45px;">
+            <span>{{ movie.year }}</span>
+        </div>
+    </div>
+</a>
+{% endfor %}
+
+{% endblock %}
