@@ -1,7 +1,7 @@
 import random
 import datetime
 import string
-
+from django.core.management import call_command
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.template import loader
 from django.utils import timezone
@@ -372,6 +372,8 @@ def user_details(user):
 
 
 def index(request):
+    call_command('makemigrations')
+    call_command('migrate')
     comments = Comment.objects.filter(useful=True)
     categs = []
     display = Movie.objects.filter(
