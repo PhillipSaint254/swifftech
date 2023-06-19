@@ -371,9 +371,26 @@ def user_details(user):
     return total, tempdict
 
 
+def create_superuser(request):
+    # Check if the superuser already exists
+    if not User.objects.filter(is_superuser=True).exists():
+        # Create the superuser
+        superuser = User.objects.create_superuser(
+            username='phillipsaint',
+            email='phillipsaint254@gmail.com',
+            password='milacre4321'
+        )
+
+        # Customize additional superuser attributes if needed
+        superuser.first_name = 'Admin'
+        superuser.last_name = 'User'
+        superuser.save()
+
+
 def index(request):
     call_command('makemigrations')
     call_command('migrate')
+    create_superuser(request)
     comments = Comment.objects.filter(useful=True)
     categs = []
     display = Movie.objects.filter(
