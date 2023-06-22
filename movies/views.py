@@ -21,7 +21,7 @@ domain = "swifftech-app"
 standard_price = 200
 pro_price = 350
 pro_max_price = 500
-current_year = datetime.date.year
+current_year = datetime.date.today().year
 
 
 def hash_generator(user):
