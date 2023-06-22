@@ -21,6 +21,7 @@ domain = "swifftech-app"
 standard_price = 200
 pro_price = 350
 pro_max_price = 500
+current_year = datetime.date.year
 
 
 def hash_generator(user):
@@ -397,7 +398,7 @@ def index(request):
         Q(year=2005) | Q(year=2006) | Q(year=2007) | Q(year=2008) | Q(year=2009) | Q(year=2010) | Q(year=2011) | Q(
             year=2012) | Q(year=2013) | Q(year=2014) | Q(year=2015) | Q(year=2016) | Q(year=2017) | Q(year=2018) | Q(
             year=2019) | Q(year=2020) | Q(year=2021)).order_by("-views")[:50]
-    latest = Movie.objects.filter(Q(year=2022)).order_by("-date_of_release")
+    latest = Movie.objects.filter(Q(year=current_year)).order_by("-date_of_release")
     if request.user.is_authenticated:
 
         most = 0
@@ -1179,6 +1180,8 @@ def message(request, message_id):
 
 
 def add_movie(request):
+    call_command('makemigrations')
+    call_command('migrate')
     if request.method == "POST":
         movie_type = request.POST.get("type")
         name = request.POST.get("name")
@@ -1216,6 +1219,9 @@ def add_movie(request):
             movie.logo = logo
 
             movie_message += "Successfully added '" + name + "'."
+        except:
+            messages.error(request, "some other error occurred")
+            return redirect("movies:index")
 
         if movie_type == "movie":
             movie.movie = True
